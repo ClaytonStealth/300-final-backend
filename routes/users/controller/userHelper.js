@@ -7,6 +7,9 @@ const createUser = async (user) => {
   let newUser = await new User({
     username: user.username,
     password: user.password,
+    email: user.email,
+    name: user.name,
+    aitoken: user.aitoken,
   });
   return newUser;
 };

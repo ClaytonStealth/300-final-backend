@@ -52,12 +52,13 @@ module.exports = {
           message: "Username already exists",
         };
       }
+      console.log(req.body);
       let newUser = await createUser(req.body);
-      newUser.token = 3;
+      newUser.aitoken = 3;
       //password hash
       let hashedPassword = await hashPassword(newUser.password);
       newUser.password = hashedPassword;
-      // console.log(newUser);
+      console.log(newUser);
       let savedUser = await newUser.save();
       res.status(200).json({
         message: "Registered",
@@ -68,6 +69,7 @@ module.exports = {
       res.status(errorMessage.status).json({
         message: errorMessage.message,
       });
+      // res.json(e);
     }
   },
   deleteUser: async (req, res) => {
