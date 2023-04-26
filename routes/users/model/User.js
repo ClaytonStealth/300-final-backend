@@ -11,6 +11,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
   },
   aitoken: Number,
+  orders: Array,
 });
 
 module.exports = mongoose.model("User", UserSchema);

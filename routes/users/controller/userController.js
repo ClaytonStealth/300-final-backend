@@ -52,7 +52,6 @@ module.exports = {
           message: "Username already exists",
         };
       }
-      console.log(req.body);
       let newUser = await createUser(req.body);
       newUser.aitoken = 3;
       //password hash
@@ -69,7 +68,6 @@ module.exports = {
       res.status(errorMessage.status).json({
         message: errorMessage.message,
       });
-      // res.json(e);
     }
   },
   deleteUser: async (req, res) => {
@@ -87,6 +85,24 @@ module.exports = {
           message: "User not deleted",
         };
       }
+    } catch (e) {
+      let errorMessage = await errorHandler(e);
+      res.status(errorMessage.status).json({
+        message: errorMessage.message,
+      });
+    }
+  },
+  authtoken: async (req, res) => {
+    try {
+      let foundUser = await User.findById(req.decoded.id);
+      console.log(foundUser);
+      if (!foundUser) {
+        throw {
+          status: 404,
+          message: "Username does not exists!",
+        };
+      }
+      res.status(200).json(foundUser);
     } catch (e) {
       let errorMessage = await errorHandler(e);
       res.status(errorMessage.status).json({
