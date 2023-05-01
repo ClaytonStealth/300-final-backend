@@ -10,6 +10,7 @@ const createUser = async (user) => {
     email: user.email,
     name: user.name,
     aitoken: user.aitoken,
+    orders: user.orders,
   });
   return newUser;
 };

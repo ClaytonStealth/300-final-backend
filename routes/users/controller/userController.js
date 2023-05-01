@@ -110,4 +110,38 @@ module.exports = {
       });
     }
   },
+  updateUser: async (req, res) => {
+    try {
+      let updatedUser = await User.findByIdAndUpdate(req.decoded.id, req.body, {
+        new: true,
+      });
+      console.log(updatedUser);
+      res.status(200).json({
+        message: "User Updated",
+        updatedUser,
+      });
+    } catch (e) {
+      let errorMessage = await errorHandler(e);
+      res.status(errorMessage.status).json({
+        message: errorMessage.message,
+      });
+    }
+  },
+  buyImages: async (req, res) => {
+    try {
+      let updatedUser = await User.findByIdAndUpdate(req.decoded.id, req.body, {
+        new: true,
+      });
+      console.log(updatedUser);
+      res.status(200).json({
+        message: "Images Bought",
+        updatedUser,
+      });
+    } catch (e) {
+      let errorMessage = await errorHandler(e);
+      res.status(errorMessage.status).json({
+        message: errorMessage.message,
+      });
+    }
+  },
 };
