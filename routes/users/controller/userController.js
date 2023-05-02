@@ -32,7 +32,7 @@ module.exports = {
       }
       //jwt
       let token = await createJWTToken(foundUser); //////////////////////////////////
-      // console.log(newUser);
+      // console.log(foundUser);
       res.status(200).json({
         message: "POST request from controller",
         userObj: foundUser,
@@ -116,7 +116,7 @@ module.exports = {
       let foundUser = await User.findById(req.decoded.id);
       console.log("foundUser", foundUser);
       console.log("req.body", req.body);
-      
+
       foundUser.orders.push(req.body);
       let savedUser = await foundUser.save();
       console.log("savedUser", savedUser);
