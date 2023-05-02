@@ -110,38 +110,26 @@ module.exports = {
       });
     }
   },
-  updateUser: async (req, res) => {
+  orderImages: async (req, res) => {
     try {
-      let updatedUser = await User.findByIdAndUpdate(req.decoded.id, req.body, {
-        new: true,
-      });
-      console.log(updatedUser);
-      res.status(200).json({
-        message: "User Updated",
-        updatedUser,
-      });
-    } catch (e) {
-      let errorMessage = await errorHandler(e);
-      res.status(errorMessage.status).json({
-        message: errorMessage.message,
-      });
-    }
-  },
-  buyImages: async (req, res) => {
-    try {
-      let updatedUser = await User.findByIdAndUpdate(req.decoded.id, req.body, {
-        new: true,
-      });
-      console.log(updatedUser);
+      console.log(req.decoded);
+      let foundUser = await User.findById(req.decoded.id);
+      console.log("foundUser", foundUser);
+      console.log("req.body", req.body);
+      
+      foundUser.orders.push(req.body);
+      let savedUser = await foundUser.save();
+      console.log("savedUser", savedUser);
       res.status(200).json({
         message: "Images Bought",
-        updatedUser,
+        userObj: savedUser,
       });
     } catch (e) {
-      let errorMessage = await errorHandler(e);
-      res.status(errorMessage.status).json({
-        message: errorMessage.message,
-      });
+      console.log(e);
+      // let errorMessage = await errorHandler(e);
+      // res.status(errorMessage.status).json({
+      //   message: errorMessage.message,
+      // });
     }
   },
 };

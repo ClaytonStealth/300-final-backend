@@ -17,8 +17,6 @@ router.post("/login", userController.login);
 router.post("/register", userController.register);
 router.post("/delete-user", verifyToken, userController.deleteUser);
 router.post("/authtoken", verifyToken, userController.authtoken);
-router.post("/update-user", verifyToken, userController.updateUser);
-router.post("/buy-images", userController.buyImages)
-
+router.post("/order-images", verifyToken, userController.orderImages);
 
 module.exports = router;
